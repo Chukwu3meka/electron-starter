@@ -1,8 +1,6 @@
-const { BrowserWindow, app, ipcMain, Notification } = require("electron");
 const path = require("path");
-// require("./ipcEvents").ipcEvents();
-require("./ipcEvents");
 const isDev = !app.isPackaged;
+const { BrowserWindow, app } = require("electron");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -42,4 +40,7 @@ app.on("window-all-closed", () => {
   if (process.platform !== "darwin") app.quit();
 });
 
-require("./ipcEvents")();
+require("./ipcEvents");
+
+// Stop error
+app.allowRendererProcessReuse = true;
